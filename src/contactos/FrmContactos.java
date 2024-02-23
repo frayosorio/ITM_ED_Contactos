@@ -5,6 +5,7 @@
  */
 package contactos;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class FrmContactos extends javax.swing.JFrame {
@@ -66,6 +67,11 @@ public class FrmContactos extends javax.swing.JFrame {
         btnGuardar.setFocusable(false);
         btnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnGuardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnGuardar);
 
         btnOrdenar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Ordenar.gif"))); // NOI18N
@@ -112,6 +118,17 @@ public class FrmContactos extends javax.swing.JFrame {
         lista.mostrar(tblContactos);
         
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        String nombreArchivo=System.getProperty("user.dir")+"/src/Datos/Datos.txt";
+        if(lista.guardar(nombreArchivo)){
+            JOptionPane.showMessageDialog(null, "Los datos fueron guardados exitosamente");
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "No se pudo guardar los datos");
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
