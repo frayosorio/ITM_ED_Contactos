@@ -11,14 +11,17 @@ import javax.swing.table.DefaultTableModel;
 public class FrmContactos extends javax.swing.JFrame {
 
     private Lista lista;
-    
+
     public FrmContactos() {
         initComponents();
 
-        lista=new Lista();
-        
-        DefaultTableModel dtm = new DefaultTableModel(null, Lista.encabezados);
-        tblContactos.setModel(dtm);
+        lista = new Lista();
+
+        String nombreArchivo = System.getProperty("user.dir")
+                + "/src/Datos/Datos.txt";
+
+        lista.desdeArchivo(nombreArchivo);
+        lista.mostrar(tblContactos);
 
     }
 
@@ -60,6 +63,11 @@ public class FrmContactos extends javax.swing.JFrame {
         btnEliminar.setFocusable(false);
         btnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnEliminar);
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Guardar.gif"))); // NOI18N
@@ -113,22 +121,29 @@ public class FrmContactos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        Nodo n=new Nodo();
+        Nodo n = new Nodo();
         lista.agregar(n);
         lista.mostrar(tblContactos);
-        
+
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        String nombreArchivo=System.getProperty("user.dir")+"/src/Datos/Datos.txt";
-        if(lista.guardar(nombreArchivo)){
+        String nombreArchivo = System.getProperty("user.dir") + "/src/Datos/Datos.txt";
+        if (lista.guardar(nombreArchivo)) {
             JOptionPane.showMessageDialog(null, "Los datos fueron guardados exitosamente");
-        }
-        else
-        {
+        } else {
             JOptionPane.showMessageDialog(null, "No se pudo guardar los datos");
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        if (tblContactos.getSelectedRow() >= 0) {
+            lista.eliminar(lista.getNodo(tblContactos.getSelectedRow()));
+            lista.mostrar(tblContactos);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un contactos");
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
