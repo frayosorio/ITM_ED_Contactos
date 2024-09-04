@@ -35,8 +35,40 @@ public class Lista {
             totalNodos++;
             apuntador = apuntador.siguiente;
         }
-
         return totalNodos;
+    }
+
+    public Nodo obtener(int posicion) {
+        int p = 0;
+        Nodo apuntador = cabeza;
+        while (apuntador != null && p < posicion) {
+            apuntador = apuntador.siguiente;
+            p++;
+        }
+        return p == posicion && apuntador != null ? apuntador : null;
+    }
+
+    public void eliminar(Nodo n) {
+        if (n != null && cabeza != null) {
+            boolean encontrado = false;
+            Nodo apuntador = cabeza;
+            Nodo anterior = null;
+            while (!encontrado && apuntador != null) {
+                if (apuntador == n) {
+                    encontrado = true;
+                } else {
+                    anterior = apuntador;
+                    apuntador = apuntador.siguiente;
+                }
+            }
+            if (encontrado) {
+                if (anterior == null) {
+                    cabeza = apuntador.siguiente;
+                } else {
+                    anterior.siguiente = apuntador.siguiente;
+                }
+            }
+        }
     }
 
     public void desdeArchivo(String nombreArchivo) {
