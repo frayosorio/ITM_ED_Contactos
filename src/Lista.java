@@ -89,6 +89,30 @@ public class Lista {
         }
     }
 
+    public boolean haciaArchivo(String nombreArchivo) {
+        String[] lineas = new String[getLongitud()];
+        int fila = 0;
+        Nodo apuntador = cabeza;
+        while (apuntador != null) {
+            lineas[fila++] = apuntador.toString();
+            apuntador = apuntador.siguiente;
+        }
+
+        return Archivo.guardarArchivo(nombreArchivo, lineas);
+    }
+
+    public void actualizar(int posicion,
+            String nombre,
+            String telefono,
+            String celular,
+            String direccion,
+            String correo) {
+        Nodo n = obtener(posicion);
+        if (n != null) {
+            n.actualizar(nombre, telefono, celular, direccion, correo);
+        }
+    }
+
     public void mostrar(JTable tbl) {
         String[] encabezados = new String[] { "Nombre", "Telefono", "Celular", "Direccion", "Correo" };
         String[][] datos = new String[getLongitud()][5];
@@ -107,6 +131,22 @@ public class Lista {
         }
 
         DefaultTableModel dtm = new DefaultTableModel(datos, encabezados);
+        dtm.addTableModelListener(new TableModelListener() {
+
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                int fila = e.getFirstRow();
+                DefaultTableModel dtm = (DefaultTableModel) e.getSource();
+                actualizar(fila,
+                        (String) dtm.getValueAt(fila, 0),
+                        (String) dtm.getValueAt(fila, 1),
+                        (String) dtm.getValueAt(fila, 2),
+                        (String) dtm.getValueAt(fila, 3),
+                        (String) dtm.getValueAt(fila, 4));
+            }
+
+        });
+
         tbl.setModel(dtm);
     }
 
