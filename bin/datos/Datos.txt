@@ -1,5 +1,7 @@
-Simon Tolomeo	2345678	3012345678	Cl 34 # 75-12	stolomeo@yahoo.es
-Zoila Chica de Bustos	 	3151234561	 	bustona@hotmail.com
 Benito Camelias	 	3128907891	 Cl 94 # 55-10	benitoc@gmail.com
 Elber Gomez Torba	 	 3057778866	 	 
+Monica Galindo	 	3025554499	 	 
+Rosa Melano	6042567788	 	 	rosmel@gmail.com
+Simon Tolomeo	2345678	3012345678	Cl 34 # 75-12	stolomeo@yahoo.es
+Zoila Chica de Bustos	 	3151234561	 	bustona@hotmail.com
 Zoila Mesa de Billar	 	 	 	 

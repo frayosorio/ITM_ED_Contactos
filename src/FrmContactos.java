@@ -109,7 +109,8 @@ public class FrmContactos extends JFrame {
     }
 
     private void btnOrdenar_Click(ActionEvent e) {
-
+        lContactos.ordenar();
+        lContactos.mostrar(tblContactos);
     }
 
 }

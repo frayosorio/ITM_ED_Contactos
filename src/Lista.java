@@ -150,4 +150,43 @@ public class Lista {
         tbl.setModel(dtm);
     }
 
+    public void intercambiar(Nodo n1, Nodo n2, Nodo a1, Nodo a2) {
+        if (cabeza != null && n1 != n2 && n1 != null && n2 != null) {
+            if (a1 != null) {
+                a1.siguiente = n2;
+            } else {
+                cabeza = n2;
+            }
+            Nodo t = n2.siguiente;
+            if (n1 != a2) {
+                n2.siguiente = n1.siguiente;
+                a2.siguiente = n1;
+            } else {
+                n2.siguiente = n1;
+            }
+            n1.siguiente = t;
+        }
+    }
+
+    public void ordenar() {
+        Nodo ni = cabeza;
+        Nodo ai = null;
+        while (ni.siguiente != null) {
+            Nodo nj = ni.siguiente;
+            Nodo aj = ni;
+            while (nj != null) {
+                if (ni.nombre.compareTo(nj.nombre) > 0) {
+                    intercambiar(ni, nj, ai, aj);
+                    Nodo t = ni;
+                    ni = nj;
+                    nj = t;
+                }
+                aj = nj;
+                nj = nj.siguiente;
+            }
+            ai = ni;
+            ni = ni.siguiente;
+        }
+    }
+
 }
